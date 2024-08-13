@@ -19,6 +19,20 @@ function App() {
     setTodos([...todos, data]);
   };
 
+  const handleUpdateOrDelete = async (todo) => {
+    if (todo.completed) {
+      await fetch(`http://localhost:9000/todos/${todo.id}`, {
+        method: 'DELETE'
+      })
+    } else {
+      await fetch(`http://localhost:9000/todos/${todo.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({...todo, completed: true})
+      })
+    }
+    getTodos();
+  }
+
   useEffect(() => {
     getTodos();
   }, []);
@@ -29,6 +43,7 @@ function App() {
       <button onClick={addTodo}>Add</button>
       {todos.map((todo) => (
         <div
+          onClick={() => handleUpdateOrDelete(todo)}
           key={todo.id}
           style={{ textDecoration: todo.completed ? "line-through" : "" }}
         >
