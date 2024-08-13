@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
 
 function App() {
+  const [todos, setTodos] = useState([]);
+
+  const getTodos = async () => {
+    const response = await fetch("http://localhost:9000/todos");
+    const todoItems = await response.json();
+    setTodos(todoItems);
+  };
+
+  useEffect(() => {
+    getTodos();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div style={{ margin: "10px" }}>
+      {todos.map((todo) => (
+        <div
+          key={todo.id}
+          style={{ textDecoration: todo.completed ? "line-through" : "" }}
         >
-          Learn React
-        </a>
-      </header>
+          {todo.text}
+        </div>
+      ))}
     </div>
   );
 }
