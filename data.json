@@ -1,3 +1,19 @@
 {
-  "todos": [{ "id": "1", "text": "Get Food", "completed": false }]
+  "todos": [
+    {
+      "id": "1",
+      "text": "Get Food",
+      "completed": true
+    },
+    {
+      "id": "7feb",
+      "text": "Something",
+      "completed": false
+    },
+    {
+      "id": "ab7e",
+      "text": "Something Else",
+      "completed": false
+    }
+  ]
 }
